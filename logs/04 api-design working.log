@@ -1,0 +1,81 @@
+❯ /memory
+  ⎿  Opened ./CLAUDE.md
+
+     ▎ To use a different editor, set the $EDITOR or $VISUAL environment variable.
+
+❯ Provide api design convention according to project
+
+  Read 1 file
+
+Here's the API design convention for this project (from .claude/rules/api-design.md):
+
+URLs and Resources
+
+- Plural, lowercase, kebab-case: /api/orders, /api/order-items
+- No verbs in paths, max one-level nesting: /api/orders/:id/items
+- Path params identify resources; query params filter, sort, paginate
+- Non-CRUD actions use sub-resource nouns: POST /api/orders/:id/cancellation
+
+HTTP Methods
+
+┌────────┬────────────────────────────────┬──────────────────────────────┐
+│ Method │            Purpose             │          Idempotent          │
+├────────┼────────────────────────────────┼──────────────────────────────┤
+│ GET    │ Read, no side effects          │ Yes                          │
+├────────┼────────────────────────────────┼──────────────────────────────┤
+│ POST   │ Create or action               │ No (support Idempotency-Key) │
+├────────┼────────────────────────────────┼──────────────────────────────┤
+│ PUT    │ Replace/update resource        │ Yes                          │
+├────────┼────────────────────────────────┼──────────────────────────────┤
+│ PATCH  │ Partial update (new endpoints) │ No guarantee                 │
+├────────┼────────────────────────────────┼──────────────────────────────┤
+│ DELETE │ Remove                         │ Yes                          │
+└────────┴────────────────────────────────┴──────────────────────────────┘
+
+Note: Current PUT /api/orders/:id accepts partial bodies—keep this behavior.
+
+Status Codes
+
+- 200 read/update with body | 201 created (include Location header) | 204 delete/empty success
+- 400 invalid input | 401 not authenticated | 403 authenticated but not allowed | 404 not found | 409 conflict
+- Never return 200 with error body or 500 for client mistakes
+
+Response Format
+
+Single resource:
+{ "id": "...", "customerId": "...", "amount": 1500, "status": "pending" }
+
+List (with pagination):
+{ "data": [...], "pagination": { "limit": 20, "nextCursor": "abc" } }
+
+Error (all errors use this shape):
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Invalid request body",
+    "details": [{ "path": "amount", "message": "Must be positive" }]
+  }
+}
+
+Validation & Data Types
+
+- Zod-parse body, params, query with .strict() (rejects unknown fields)
+- Money: integer cents, never floats
+- IDs: server-generated UUIDs
+- Timestamps: ISO 8601 UTC (2026-09-30T10:15:00.000Z)
+- Bound every input (max lengths, min/max numbers)
+
+Security
+
+- Identity from auth token only, never from request body
+- Every read/update/delete checks caller owns the resource (return 404 for other users' resources)
+- No sensitive data in URLs; rate limit all routes (stricter on writes)
+
+New Endpoint Checklist
+
+1. Path, method, status codes match rules
+2. Zod schemas with .strict() and bounds
+3. Standard error shape + error middleware
+4. Pagination/filters/sorts allowlisted (if applicable)
+5. Ownership check (if auth exists)
+6. Tests: success, 400, 404, 401/403

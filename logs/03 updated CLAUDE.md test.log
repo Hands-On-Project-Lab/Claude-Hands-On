@@ -1,0 +1,33 @@
+>> how to run one test file and which error format the API uses
+
+=====================================================
+Based on the CLAUDE.md documentation in this project:
+
+----------------------
+Running one test file:
+
+With vitest, you can run a specific test file by passing the file path:
+
+npm run test:run -- src/routes/orders.test.ts
+
+Or in watch mode:
+npm test -- src/routes/orders.test.ts
+
+(Though CLAUDE.md notes: never run npm test in non-interactive contexts — use npm run test:run for CI/verification.)
+
+Error format:
+
+The API uses a standard error shape everywhere:
+
+{
+  "error": {
+    "code": "string",
+    "message": "string",
+    "details": "unknown (optional)"
+  }
+}
+
+Examples from the conventions:
+- 400 Validation error: { "error": { "code": "VALIDATION_ERROR", "message": "..." } }
+- 404 Not found: { "error": { "code": "NOT_FOUND", "message": "..." } }
+- 500 Unexpected error: generic message only, details logged server-side (never return stack traces)

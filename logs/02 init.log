@@ -1,0 +1,38 @@
+ /init
+
+I'll analyze this codebase and create a comprehensive CLAUDE.md file. Let me start by exploring the project structure.
+----------------------------------------------------------------------------------------------------------------------
+
+  Searched for 6 patterns, read 8 files
+  +++++++++++++++++++++++++++++++++++++
+
+================================================================
+Now I'll create a comprehensive CLAUDE.md file for this project.
+
+
+----------------------------------------------------------------
+● Write(CLAUDE.md)
+Wrote 61 lines to CLAUDE.md
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project Overview
+
+**orders-api** is a lightweight REST API built with Express.js and TypeScript for managing customer orders. It impleme
+nts CRUD operations on orders with runtime validation using Zod.
+
+## Development Commands
+… +54 lines
+
+Done! I've created a CLAUDE.md file with comprehensive guidance for future Claude Code sessions in this repository.
+
+The file includes:
+
+- Project Overview — Simple REST API for order management using Express + TypeScript
+- Development Commands — npm run dev for the server, npm test for watching tests, npm run test:run for single runs
+- Architecture — Explained the router-based structure, in-memory storage pattern, Zod validation approach, and error handling strategy
+- API Endpoints — Documented all CRUD routes for orders plus the health check
+- Testing — Noted vitest + supertest stack and the colocated test file pattern
+
+The file avoids listing obvious practices and focuses on project-specific context that would help any Claude instance get productive quickly without having to read multiple files.

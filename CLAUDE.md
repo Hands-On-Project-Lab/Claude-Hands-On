@@ -23,7 +23,7 @@ Claude Code must not assume a target item exists. Check the code first, and impl
 
 | Area             | Current         | Target standard                                       |
 | ---------------- | --------------- | ----------------------------------------------------- |
-| Storage          | in-memory `Map` | swap behind a repository interface before adding a DB |
+| Storage          | in-memory`Map`  | swap behind a repository interface before adding a DB |
 | Auth             | none            | JWT/OAuth2 bearer, per-route authorization            |
 | Security headers | none            | `helmet`                                              |
 | CORS             | none            | explicit origin allowlist                             |
@@ -67,14 +67,7 @@ Layering rule when the code grows: route (HTTP only) -> service (business logic)
 
 ### API contract
 
-- Status codes: `200` read/update, `201` create (with `Location` header), `204` delete, `400` validation, `401` unauthenticated, `403` unauthorized, `404` not found, `409` conflict, `429` rate limited, `500` unexpected.
-- One error shape everywhere: `{ "error": { "code": string, "message": string, "details"?: unknown } }`. Match the existing shape if it differs; never invent per-route shapes.
-- Money: store and transmit `amount` in integer minor units (e.g. cents). Never floats.
-- Timestamps: ISO 8601 UTC strings.
-- IDs: validate `:id` format (UUID) before lookup. Malformed id returns 400, unknown id returns 404.
-- List endpoints: add pagination (`limit` max-capped, `cursor` or `offset`) before exposing real data volumes.
-- Breaking changes require a new version prefix (`/api/v2/...`); never change response shapes in place.
-- `POST` that must be retry-safe should accept an `Idempotency-Key` header.
+- API design rules: see .claude/rules/api-design.md
 
 ### Testing
 
