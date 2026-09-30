@@ -36,11 +36,20 @@ Claude Code must not assume a target item exists. Check the code first, and impl
 
 ## Architecture
 
+Production-ready layered structure: routes (HTTP) → services (business logic) → repositories (storage).
+
 ```
-src/app.ts                 Express app: middleware + router mounting. Exports `app`. Never calls listen().
-src/server.ts              Entry point only: import app, listen(), handle shutdown signals.
-src/routes/orders.ts       Orders router (/api/orders): Zod schemas, handlers, store
-src/routes/orders.test.ts  Integration tests (vitest + supertest)
+src/app.ts                            Express app: middleware + router mounting. Exports `app`. Never calls listen().
+src/server.ts                         Entry point only: import app, listen(), handle shutdown signals.
+src/routes/orders.routes.ts           HTTP handlers: parse requests, call service, map responses
+src/routes/orders.routes.test.ts      Integration tests (vitest + supertest)
+src/services/orders.service.ts        Business logic: validates, throws AppError, never touches Express/storage
+src/repositories/orders.repository.ts Repository interface + in-memory Map implementation. Services never touch storage directly.
+src/schemas/orders.schema.ts          Zod schemas: single source of truth. Validate body, params, query.
+src/errors/app-error.ts               Custom error class (status, code, message, details). Shared.
+src/middleware/error-handler.ts       Central 4-arg error handler. Catches all AppError and unexpected errors.
+src/middleware/async-handler.ts       Wraps async handlers to forward promise rejections to error middleware.
+src/middleware/validate.ts            Zod validation middleware for body and params. Applies defaults.
 ```
 
 Endpoints:

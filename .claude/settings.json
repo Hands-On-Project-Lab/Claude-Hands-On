@@ -11,7 +11,11 @@
       "Bash(npx vitest:*)",
       "Bash(git status:*)",
       "Bash(git diff:*)",
-      "Bash(git log:*)"
+      "Bash(git log:*)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npm run test:run)",
+      "Bash(npm audit --omit=dev)",
+      "Bash(node .claude/skills/new-endpoint/scripts/verify.mjs)"
     ],
     "ask": [
       "Bash(git push:*)",
