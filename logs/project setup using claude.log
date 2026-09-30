@@ -1,0 +1,143 @@
+PS C:\Users\kumar\Desktop\Claude\Claude WorkSpace\CCDE-F_Bootcamp\Day03\claude-code-lab> mkdir orders-api; cd orders-api; git init; npm init -y
+
+
+    Directory: C:\Users\kumar\Desktop\Claude\Claude WorkSpace\CCDE-F_Bootcamp\Day03\claude-code-lab
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        30-09-2026     18:06                orders-api
+Initialized empty Git repository in C:/Users/kumar/Desktop/Claude/Claude WorkSpace/CCDE-F_Bootcamp/Day03/claude-code-lab/orders-api/.git/
+npm warn Unknown user config "allow-scripts". This will stop working in the next major version of npm.
+Wrote to C:\Users\kumar\Desktop\Claude\Claude WorkSpace\CCDE-F_Bootcamp\Day03\claude-code-lab\orders-api\package.json:
+
+{
+  "name": "orders-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
+
+
+
+
+
+PS C:\Users\kumar\Desktop\Claude\Claude WorkSpace\CCDE-F_Bootcamp\Day03\claude-code-lab\orders-api> npm i express zod; npm i -D typescript tsx vitest supertest @types/express @types/node @types/supertest
+npm warn Unknown user config "allow-scripts". This will stop working in the next major version of npm.
+
+added 69 packages, and audited 70 packages in 3s
+
+29 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+npm warn Unknown user config "allow-scripts". This will stop working in the next major version of npm.
+
+added 144 packages, and audited 214 packages in 16s
+
+55 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS C:\Users\kumar\Desktop\Claude\Claude WorkSpace\CCDE-F_Bootcamp\Day03\claude-code-lab\orders-api> New-Item -ItemType Directory -Force .claude, .claude\commands, .claude\agents, .claude\skills
+
+
+    Directory: C:\Users\kumar\Desktop\Claude\Claude WorkSpace\CCDE-F_Bootcamp\Day03\claude-code-lab\orders-api
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        30-09-2026     18:09                .claude
+
+
+    Directory: C:\Users\kumar\Desktop\Claude\Claude WorkSpace\CCDE-F_Bootcamp\Day03\claude-code-lab\orders-api\.claude
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        30-09-2026     18:09                commands
+d-----        30-09-2026     18:09                agents
+d-----        30-09-2026     18:09                skills
+
+
+PS C:\Users\kumar\Desktop\Claude\Claude WorkSpace\CCDE-F_Bootcamp\Day03\claude-code-lab\orders-api> npm test
+npm warn Unknown user config "allow-scripts". This will stop working in the next major version of npm.
+
+> orders-api@1.0.0 test
+> vitest
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ DEV  v5.0.3 C:/Users/kumar/Desktop/Claude/Claude WorkSpace/CCDE-F_Bootcamp/Day03/claude-code-lab/orders-api
+
+ ✓ src/routes/orders.test.ts (8 tests) 64ms
+   ✓ Orders API (8)
+     ✓ GET /api/orders (1)
+       ✓ should return an empty array initially 22ms
+     ✓ POST /api/orders (3)
+       ✓ should create a new order 21ms
+       ✓ should reject invalid order data 4ms
+       ✓ should reject missing required fields 3ms
+     ✓ GET /api/orders/:id (1)
+       ✓ should return 404 for non-existent order 3ms
+     ✓ PUT /api/orders/:id (1)
+       ✓ should return 404 for non-existent order 3ms
+     ✓ DELETE /api/orders/:id (1)
+       ✓ should return 404 for non-existent order 2ms
+     ✓ GET /health (1)
+       ✓ should return health check 3ms
+
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
+   Start at  18:47:37
+   Duration  661ms (import 76%, tests 12%, transform 10%, worker 2%)
+
+ PASS  Waiting for file changes...
+       press h to show help, press q to quit
+PS C:\Users\kumar\Desktop\Claude\Claude WorkSpace\CCDE-F_Bootcamp\Day03\claude-code-lab\orders-api> git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .gitignore
+        package-lock.json
+        package.json
+        src/
+        tsconfig.json
+        vitest.config.ts
+
+nothing added to commit but untracked files present (use "git add" to track)
+PS C:\Users\kumar\Desktop\Claude\Claude WorkSpace\CCDE-F_Bootcamp\Day03\claude-code-lab\orders-api> git add .
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package-lock.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/routes/orders.test.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/routes/orders.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/server.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tsconfig.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'vitest.config.ts', LF will be replaced by CRLF the next time Git touches it
+PS C:\Users\kumar\Desktop\Claude\Claude WorkSpace\CCDE-F_Bootcamp\Day03\claude-code-lab\orders-api> git add .
+PS C:\Users\kumar\Desktop\Claude\Claude WorkSpace\CCDE-F_Bootcamp\Day03\claude-code-lab\orders-api> git commit -m "project setup using claude"
+[master (root-commit) 34a9286] project setup using claude
+ 9 files changed, 3523 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 package-lock.json
+ create mode 100644 package.json
+ create mode 100644 src/app.ts
+ create mode 100644 src/routes/orders.test.ts
+ create mode 100644 src/routes/orders.ts
+ create mode 100644 src/server.ts
+ create mode 100644 tsconfig.json
+ create mode 100644 vitest.config.ts
